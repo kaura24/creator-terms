@@ -115,7 +115,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:1
 <button data-cat="camera">촬영 기법</button>
 <button data-cat="effect">효과</button>
 <button data-cat="web">웹사이트 움직임</button>
-<button id="expandAll">예시 전부 펼치기</button>
+<button id="expandAll">예시 전부 접기</button>
 <div class="fontbox"><label for="fs">글자 크기</label><input id="fs" type="range" min="14" max="32" value="18"><span id="fsval">18px</span></div>
 </div>
 <main><div class="grid" id="grid"></div><small class="note" id="count"></small></main>
@@ -374,7 +374,7 @@ function demoFor(name){
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
   const list=DATA.filter(d=>(cat==="all"||d[0]===cat)&&(!q||(d[1]+d[2]+d[3]+d[4]).toLowerCase().includes(q)));
-  const cardHtml=(d)=>`<article class="card"><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></div><button class="copy example-toggle">예시 보기 ▾ — 아래에 예시가 펼쳐진다</button><div class="demo-wrap" style="display:none">${demoFor(d[1])}</div></article>`;
+  const cardHtml=(d)=>`<article class="card"><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></div><button class="copy example-toggle">예시 접기 ▴</button><div class="demo-wrap" style="display:block">${demoFor(d[1])}</div></article>`;
   let html="";
   if(cat==="all"&&!q){["ui","motion","camera","effect","web"].forEach(c=>{const sub=list.filter(d=>d[0]===c); if(sub.length) html+=`<h2 class="cat-head">${catName[c]} · ${sub.length}개</h2>`+sub.map(cardHtml).join("");});}
   else html=list.map(cardHtml).join("");
