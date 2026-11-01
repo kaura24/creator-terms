@@ -8,7 +8,7 @@
 <style>
 :root{--fs:18px}
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#f7f5ef;color:#222;font-size:var(--fs);line-height:1.65}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#f2f2f2;color:#222;font-size:var(--fs);line-height:1.65}
 header{padding:28px 20px 18px;max-width:1060px;margin:0 auto}
 h1{font-size:1.7em;line-height:1.25;margin:0 0 8px}
 p.lead{margin:0;color:#555}
@@ -21,18 +21,18 @@ button.active{background:#222;color:#fff;border-color:#222}
 main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .card{background:#fff;border:1px solid #e3ddcd;border-radius:16px;padding:16px}
-.tag{display:inline-block;font-size:13px;background:#fff3d6;border:1px solid #f0d48a;border-radius:999px;padding:2px 9px;margin-bottom:8px}
+.tag{display:inline-block;font-size:13px;background:#FFF3B0;border:1px solid #FFBC00;border-radius:999px;padding:2px 9px;margin-bottom:8px}
 .card h2{font-size:1.05em;margin:0 0 6px}
 .card h2 span{color:#888;font-weight:500;font-size:.85em}
 .mean{margin:0 0 10px;color:#333}
 .prompt{background:#f4f2ea;border-radius:10px;padding:10px 12px;font-size:.92em}
 .prompt b{display:block;color:#666;font-size:.85em;margin-bottom:2px}
 .copy{margin-top:10px}
-.stage{height:110px;background:#efece2;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
-.stage .box{width:52px;height:52px;background:#ff7a45;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px}
-.stage .ball{width:36px;height:36px;background:#ff7a45;border-radius:50%}
+.stage{height:110px;background:#e8e8e8;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.stage .box{width:52px;height:52px;background:#FFBC00;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#222;font-size:22px}
+.stage .ball{width:36px;height:36px;background:#FFBC00;border-radius:50%}
 .stage .bar{width:70%;height:12px;background:#ddd;border-radius:99px;overflow:hidden}
-.stage .bar i{display:block;height:100%;width:40%;background:#ff7a45;border-radius:99px}
+.stage .bar i{display:block;height:100%;width:40%;background:#FFBC00;border-radius:99px}
 @keyframes fade{0%,100%{opacity:0}50%{opacity:1}}
 @keyframes slide{0%,100%{transform:translateY(24px);opacity:0}50%{transform:translateY(0);opacity:1}}
 @keyframes pan{0%,100%{transform:translateX(-60px)}50%{transform:translateX(60px)}}
@@ -46,11 +46,11 @@ main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 @keyframes shimmer{from{background-position:-200px 0}to{background-position:200px 0}}
 @keyframes cross{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes wipe{0%,100%{transform:translateX(-100%)}50%{transform:translateX(0)}}
-@keyframes glow{0%,100%{text-shadow:0 0 4px #ffb27a}50%{text-shadow:0 0 18px #ff7a45}}
+@keyframes glow{0%,100%{text-shadow:0 0 4px #ffb27a}50%{text-shadow:0 0 18px #FFBC00}}
 .anim-fade{animation:fade 2.4s infinite}.anim-slide{animation:slide 2.4s infinite}.anim-pan{animation:pan 3s ease-in-out infinite}.anim-tilt{animation:tilt 3s ease-in-out infinite}.anim-dolly{animation:dolly 3s ease-in-out infinite}.anim-orbit{animation:orbit 3s linear infinite}.anim-shake{animation:shake .4s infinite}.anim-spin{animation:spin 1.2s linear infinite}.anim-morph{animation:morph 2.4s infinite}.anim-bounce{animation:bounce 1.8s infinite}.anim-smooth{animation:pan 4s ease-in-out infinite}
 .skel{width:80%;display:flex;flex-direction:column;gap:8px}.skel div{height:12px;border-radius:99px;background:linear-gradient(90deg,#ddd 25%,#f2f2f2 50%,#ddd 75%);background-size:200px 100%;animation:shimmer 1.4s infinite}
-.spin{width:34px;height:34px;border:4px solid #ddd;border-top-color:#ff7a45;border-radius:50%;animation:spin 1s linear infinite}
-.progress{width:80%;height:14px;background:#ddd;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:#ff7a45;animation:prog 2.5s ease-in-out infinite}@keyframes prog{0%{width:0}70%,100%{width:100%}}
+.spin{width:34px;height:34px;border:4px solid #ddd;border-top-color:#FFBC00;border-radius:50%;animation:spin 1s linear infinite}
+.progress{width:80%;height:14px;background:#ddd;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:#FFBC00;animation:prog 2.5s ease-in-out infinite}@keyframes prog{0%{width:0}70%,100%{width:100%}}
 .demo-toast{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:8px 14px;border-radius:99px;font-size:14px;display:none}
 .demo-modal{position:absolute;inset:18px;background:#fff;border-radius:12px;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .demo-drawer{position:absolute;top:0;bottom:0;left:0;width:55%;background:#fff;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:4px 0 16px rgba(0,0,0,.15)}
@@ -61,11 +61,11 @@ main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .demo-grain{position:absolute;inset:0;opacity:.25;background-image:radial-gradient(#000 1px,transparent 1px);background-size:6px 6px;animation:shake .3s infinite}
 .demo-bars{position:absolute;left:0;right:0;height:16px;background:#000}.demo-bars.top{top:0}.demo-bars.bottom{bottom:0}
 .demo-cross{position:absolute;inset:0}.demo-cross div{position:absolute;inset:0}.demo-cross div:last-child{animation:cross 3s infinite}
-.demo-wipe{position:absolute;inset:0;background:#ff7a45;animation:wipe 3s ease-in-out infinite}
+.demo-wipe{position:absolute;inset:0;background:#FFBC00;animation:wipe 3s ease-in-out infinite}
 .demo-blur{font-size:22px;font-weight:700;animation:blur 3s infinite}@keyframes blur{0%,100%{filter:blur(6px);opacity:.5}50%{filter:blur(0);opacity:1}}
 .demo-glow{font-size:22px;font-weight:800;animation:glow 2s infinite}
 .demo-count{font-size:28px;font-weight:800}
-.demo-stagger{display:flex;gap:10px}.demo-stagger i{width:26px;height:26px;background:#ff7a45;border-radius:50%;animation:slide 1.8s infinite}.demo-stagger i:nth-child(2){animation-delay:.2s}.demo-stagger i:nth-child(3){animation-delay:.4s}
+.demo-stagger{display:flex;gap:10px}.demo-stagger i{width:26px;height:26px;background:#FFBC00;border-radius:50%;animation:slide 1.8s infinite}.demo-stagger i:nth-child(2){animation-delay:.2s}.demo-stagger i:nth-child(3){animation-delay:.4s}
 small.note{display:block;color:#777;margin-top:16px}
 footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:14px}
 @media(max-width:600px){.fontbox{margin-left:0}}
@@ -83,6 +83,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:1
 <button data-cat="motion">모션그래픽</button>
 <button data-cat="camera">촬영 기법</button>
 <button data-cat="effect">효과</button>
+<button data-cat="web">웹사이트 움직임</button>
 <div class="fontbox"><label for="fs">글자 크기</label><input id="fs" type="range" min="14" max="32" value="18"><span id="fsval">18px</span></div>
 </div>
 <main><div class="grid" id="grid"></div><small class="note" id="count"></small></main>
@@ -152,8 +153,68 @@ const DATA=[
 ["effect","렛터박스","Letterbox","위아래에 검은 띠를 넣어 영화 같은 화면 비율을 만드는 것.","위아래 검은 띠의 렛터박스로 영화 느낌을 줘"],
 ["effect","모션 블러","Motion Blur","빠른 움직임에 잔상을 남겨 속도감을 주는 흐림.","빠른 움직임에 모션 블러로 속도감을 줘"],
 ["effect","감소 모션","Reduced Motion","기기의 '동작 줄이기' 설정 사용자를 위해 애니메이션을 줄이거나 끄는 배려.","동작 줄이기를 켠 사람에게는 애니메이션을 끄게 해줘"]
-];
-const catName={ui:"UI 구조 · 움직임",motion:"모션그래픽",camera:"촬영 기법",effect:"효과"};
+
+["ui","팝오버","Popover","버튼 근처에 작게 뜨는 팝업. 큰 모달보다 가볍다.","버튼 옆에 팝오버로 추가 옵션을 보여줘"],
+["ui","바텀 시트","Bottom Sheet","화면 아래에서 올라오는 패널. 모바일 메뉴·상세 정보에 쓴다.","아래에서 바텀 시트가 올라오며 상세 정보를 보여줘"],
+["ui","드롭다운","Dropdown","누르면 아래로 펼쳐지는 선택 목록.","정렬 기준을 드롭다운으로 선택하게 해줘"],
+["ui","사이드바","Sidebar","옆에 고정된 메뉴 영역.","왼쪽 사이드바에 메뉴를 고정해줘"],
+["ui","히어로 섹션","Hero Section","첫 화면의 대표 영역. 큰 제목과 버튼이 있다.","첫 화면 히어로 섹션에 큰 제목과 버튼을 넣어줘"],
+["ui","빈 상태","Empty State","내용이 없을 때 보여주는 안내 화면.","목록이 비었을 때 빈 상태 안내를 보여줘"],
+["ui","OG 이미지","OG Image","링크를 공유할 때 뜨는 대표 이미지.","공유할 때 OG 이미지가 뜨게 설정해줘"],
+["ui","OG 타이틀","OG Title","링크를 공유할 때 뜨는 제목.","공유 미리보기 제목을 OG 타이틀로 지정해줘"],
+["ui","페이지네이션","Pagination","긴 목록을 1, 2, 3 페이지로 나눠 보여주는 것.","목록 하단에 페이지네이션을 넣어줘"],
+["motion","아크","Arc","움직임이 직선이 아니라 곡선을 그리는 궤적.","물체가 아크를 그리며 곡선으로 움직이게 해줘"],
+["motion","스페이싱","Spacing","키프레임 사이의 간격으로 속도감을 조절하는 것.","스페이싱을 좁혀서 시작은 느리게, 끝은 빠르게 해줘"],
+["motion","슬로 인","Slow In","천천히 시작해 점점 빨라지는 움직임.","움직임이 슬로 인으로 천천히 시작되게 해줘"],
+["motion","베지어 커브","Bezier Curve","속도 변화를 곡선으로 조절하는 그래프.","베지어 커브로 가속을 부드럽게 조절해줘"],
+["motion","트윈","Tween","시작과 끝 사이 움직임을 자동으로 채워주는 것.","두 키프레임 사이를 트윈으로 자연스럽게 이어줘"],
+["motion","펄스","Pulse","주기적으로 커졌다 작아지는 반복 움직임.","알림 아이콘이 펄스로 주기적으로 커지게 해줘"],
+["motion","바운스","Bounce","튕기듯 통통 튀는 움직임.","아이콘이 바운스처럼 통통 튀게 해줘"],
+["motion","스프링","Spring","용수철처럼 탄성 있게 움직이는 방식.","메뉴가 스프링처럼 탄성 있게 열리게 해줘"],
+["motion","핑퐁","Ping Pong","앞뒤로 왕복하며 재생되는 움직임.","배너가 핑퐁으로 좌우로 왕복하게 해줘"],
+["motion","리빌","Reveal","가려져 있던 것이 드러나는 움직임.","제목이 아래에서 리빌되며 나타나게 해줘"],
+["camera","휩 팬","Whip Pan","빠르게 휙 돌려서 장면을 바꾸는 패닝.","다음 장면으로 휩 팬으로 빠르게 전환해줘"],
+["camera","크래시 줌","Crash Zoom","급격히 당기거나 넓히는 줌.","인물 얼굴로 크래시 줌 인 해줘"],
+["camera","돌리 줌","Dolly Zoom","카메라 이동과 줌을 반대로 써서 배경만 왜곡되는 효과.","배경이 늘어나는 돌리 줌 효과를 넣어줘"],
+["camera","랙 포커스","Rack Focus","초점을 한 피사체에서 다른 피사체로 옮기는 것.","앞사람에서 뒷사람으로 랙 포커스를 옮겨줘"],
+["camera","더치 앵글","Dutch Angle","화면을 일부러 기울여 불안감을 주는 각도.","긴장감을 위해 더치 앵글로 기울여 찍어줘"],
+["camera","FPV 드론 샷","FPV Drone Shot","1인칭 시점으로 빠르게 날아가는 드론 샷.","FPV 드론 샷으로 좁은 공간을 빠르게 통과해줘"],
+["camera","스피드 램프","Speed Ramp","장면 안에서 속도를 느리게·빠르게 바꾸는 것.","액션 장면에 스피드 램프를 넣어줘"],
+["camera","프리즈 프레임","Freeze Frame","영상을 한 장면에서 멈추는 것.","결정적인 순간에 프리즈 프레임으로 멈춰줘"],
+["camera","롤","Roll","카메라를 좌우로 기울이는 회전.","카메라를 롤로 살짝 기울여줘"],
+["camera","트럭","Truck","카메라를 좌우로 평행 이동하며 찍는 것.","인물을 따라 트럭으로 옆으로 이동하며 찍어줘"],
+["camera","페데스탈","Pedestal","카메라를 상하로 들어 올리거나 내리며 찍는 것.","카메라를 페데스탈로 아래에서 위로 올려줘"],
+["camera","스태틱 샷","Static Shot","카메라를 완전히 고정하고 찍는 것.","스태틱 샷으로 고정해서 찍어줘"],
+["camera","미디엄 샷","Medium Shot","허리 위부터 찍는 중간 거리 샷.","허리 위가 보이는 미디엄 샷으로 찍어줘"],
+["camera","로우 앵글","Low Angle","아래에서 올려다보며 찍는 각도.","로우 앵글로 인물을 크게 보이게 찍어줘"],
+["camera","하이 앵글","High Angle","위에서 내려다보며 찍는 각도.","하이 앵글로 작아 보이게 내려다보며 찍어줘"],
+["camera","POV 샷","POV Shot","주인공 시점으로 찍는 것.","POV 샷으로 주인공 눈높이에서 찍어줘"],
+["camera","에스타블리싱 샷","Establishing Shot","장소를 처음 소개하는 넓은 샷.","장소를 소개하는 에스타블리싱 샷으로 시작해줘"],
+["camera","불릿 타임","Bullet Time","시간이 멈춘 듯 피사체 주위를 이동하며 찍는 것.","불릿 타임처럼 시간이 멈춘 듯 주위를 돌며 찍어줘"],
+["camera","줌 인","Zoom In","렌즈로 피사체를 당겨 크게 보이게 하는 것. 카메라 이동은 없다.","줌 인으로 얼굴을 크게 보여줘"],
+["camera","줌 아웃","Zoom Out","렌즈로 넓게 보이게 하는 것.","줌 아웃으로 전체 장소를 보여줘"],
+["camera","돌리 인","Dolly In","카메라가 피사체 쪽으로 다가가며 찍는 것.","돌리 인으로 인물에게 다가가줘"],
+["camera","돌리 아웃","Dolly Out","카메라가 피사체에서 멀어지며 찍는 것.","돌리 아웃으로 멀어지며 전체를 보여줘"],
+["camera","크레인 업","Crane Up","크레인으로 카메라를 위로 올리며 찍는 것.","크레인 업으로 위로 올라가며 찍어줘"],
+["effect","비네트","Vignette","사진·영상 가장자리를 어둡게 해서 중심을 돋보이게 하는 것.","가장자리에 은은한 비네트를 넣어줘"],
+["effect","LUT","LUT","색감을 한 번에 바꾸는 색 보정 프리셋.","따뜻한 LUT를 적용해줘"],
+["effect","로어 서드","Lower Third","화면 하단에 뜨는 이름·직함 자막 그래픽.","하단에 로어 서드로 이름과 직함을 넣어줘"],
+["effect","스태빌라이제이션","Stabilization","흔들린 영상을 소프트웨어로 안정화하는 것.","흔들린 영상에 스태빌라이제이션을 적용해줘"],
+["effect","컷","Cut","장면을 바로 잘라서 다음 장면으로 바꾸는 가장 기본 전환.","장면은 컷으로 바로 바꿔줘"],
+["web","스무스 스크롤","Smooth Scroll","딱딱하게 점프하지 않고 부드럽게 스크롤되는 것.","앵커를 누르면 스무스 스크롤로 부드럽게 이동해줘"],
+["web","스티키 헤더","Sticky Header","스크롤해도 상단 메뉴가 따라다니는 것.","상단 메뉴를 스티키 헤더로 고정해줘"],
+["web","패럴랙스 스크롤","Parallax Scroll","스크롤할 때 배경과 앞 내용이 다른 속도로 움직이는 것.","배경이 느리게 움직이는 패럴랙스 스크롤을 넣어줘"],
+["web","리빌 온 스크롤","Reveal on Scroll","스크롤해서 보일 때 내용이 드러나는 것.","섹션이 화면에 들어올 때 리빌 온 스크롤로 나타나게 해줘"],
+["web","마퀴","Marquee","글자나 이미지가 띠처럼 계속 흘러가는 것.","상단에 마퀴로 문구가 흘러가게 해줘"],
+["web","페이지 전환","Page Transition","페이지가 바뀔 때 페이드나 슬라이드로 넘어가는 연출.","페이지 전환은 페이드로 부드럽게 넘어가게 해줘"],
+["web","프리로더","Preloader","페이지가 뜨기 전에 보이는 로딩 화면.","페이지가 뜨기 전에 프리로더를 보여줘"],
+["web","백 투 탑","Back to Top","맨 위로 돌아가는 버튼.","오른쪽 아래에 백 투 탑 버튼을 넣어줘"],
+["web","타이핑 효과","Typing Effect","글자가 한 자씩 타이핑되듯 나타나는 효과.","제목을 타이핑 효과로 한 자씩 보여줘"],
+["web","카드 리프트","Card Lift","마우스를 올리면 카드가 살짝 떠오르는 효과.","카드에 마우스를 올리면 리프트처럼 살짝 떠오르게 해줘"],
+["web","언더라인 애니메이션","Underline Animation","링크 밑줄이 왼쪽에서 오른쪽으로 그어지는 효과.","링크에 마우스를 올리면 언더라인이 그어지게 해줘"],
+["web","줌 온 호버","Zoom on Hover","마우스를 올리면 이미지가 살짝 확대되는 효과.","이미지에 마우스를 올리면 줌 온 호버로 살짝 커지게 해줘"],
+ ];
+const catName={ui:"UI 구조 · 움직임",motion:"모션그래픽",camera:"촬영 기법",effect:"효과",web:"웹사이트 움직임"};
 let cat="all";
 function demoFor(name){
   const b=(t)=>`<button class="copy" data-demo="${t}">예시 보기</button>`;
