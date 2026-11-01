@@ -139,6 +139,11 @@ main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .fpv-gate{position:absolute;width:60px;height:60px;border:4px solid #FFBC00;border-radius:50%;animation:fpvGate 3.6s linear infinite}
 .bullet-subject{width:44px;height:44px;background:#FFBC00;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}.bullet-cam{position:absolute;width:18px;height:18px;font-size:14px;animation:orbit 3.6s linear infinite}
 .roll-frame{width:150px;height:70px;border:3px solid #222;border-radius:8px;overflow:hidden;animation:rollRot 4s ease-in-out infinite;display:flex;align-items:center;justify-content:center;background:#ddd}
+.cam-frame{width:170px;height:80px;border:3px solid #222;border-radius:10px;overflow:hidden;position:relative;background:#7ab8ff}.cam-scene{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center}.cam-scene i{font-style:normal;font-size:28px}.cam-label{position:absolute;left:6px;top:4px;font-size:11px;background:rgba(255,255,255,.85);border-radius:99px;padding:2px 7px;z-index:3}
+@keyframes scenePan{0%,100%{transform:translateX(-40px)}50%{transform:translateX(40px)}}
+@keyframes sceneTilt{0%,100%{transform:translateY(-20px)}50%{transform:translateY(20px)}}
+@keyframes sceneDolly{0%,100%{transform:scale(.7)}50%{transform:scale(1.25)}}
+@keyframes sceneOrbit{0%{transform:rotate(-25deg) translateX(0)}50%{transform:rotate(25deg) translateX(0)}100%{transform:rotate(-25deg) translateX(0)}}
 small.note{display:block;color:#777;margin-top:16px}
 footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:14px}
 @media(max-width:600px){.fontbox{margin-left:0}}
@@ -147,7 +152,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:1
 <body>
 <header>
 <h1>크리에이터 용어 사전</h1>
-<p class="lead">“좀 더 세련되게” 말고, 이름으로 요청하자. UI · 모션그래픽 · 촬영 · 효과 용어를 의미 중심으로 정리했다. 모든 예시는 요식업 장면(메뉴 · 주문 · 예약 · 음식 클로즈업)으로 보여준다. 원하는 용어를 찾고, 아래 요청 문장을 복사해서 AI나 제작자에게 그대로 붙여넣으면 된다.</p>
+<p class="lead">“좀 더 세련되게” 말고, 이름으로 요청하자. UI · 모션그래픽 · 촬영 · 효과 용어를 의미 중심으로 정리했다. 모든 예시는 요식업 장면(메뉴 · 주문 · 예약 · 음식 클로즈업)으로 보여준다. 원하는 용어를 찾고, 아래 요청 문장을 복사해서 AI나 제작자에게 그대로 붙여넣으면 된다.</p><p style="background:#FFF3B0;border-radius:10px;padding:10px 12px;font-size:.92em">🎬 실제 Threads 원본 예시 (영상은 복사하지 않고 링크만 연결): <a href="https://www.threads.com/@liorasolveil/post/DeVmPbsAoLH" target="_blank" rel="noopener">카메라 무빙 12종 @liorasolveil</a> · <a href="https://www.threads.com/@inve_insight/post/DeaJpCEExFM" target="_blank" rel="noopener">촬영 기법 @inve_insight</a> · <a href="https://www.threads.com/@ai_onepage/post/DfHl15GAhu3" target="_blank" rel="noopener">웹 모션 10종 @ai_onepage</a> · <a href="https://www.threads.com/@bokmanhi/post/De2oZTwj_vP" target="_blank" rel="noopener">웹 애니메이션 7종 @bokmanhi</a> · <a href="https://www.threads.com/@vibe.bizness/post/De6IY5ZD1Oj" target="_blank" rel="noopener">텍스트 효과 6종 @vibe.bizness</a> · <a href="https://www.threads.com/@ai_cpocoder/post/Dey9aa8DyYb" target="_blank" rel="noopener">웹 애니메이션 9종 (카운트업·마퀴·타이핑)</a> — 해당 용어 카드 아래에도 같은 링크가 뜬다.</p>
 </header>
 <div class="controls">
 <input id="q" type="search" placeholder="검색은 선택 사항 — 카테고리를 누르면 목록이 전부 아래에 뜬다">
@@ -289,6 +294,7 @@ const DATA=[
  ];
 const catName={ui:"UI 구조 · 움직임",motion:"모션그래픽",camera:"촬영 기법",effect:"효과",web:"웹사이트 움직임"};
 let cat="all";
+const REF={"페이드 인 / 아웃":"https://www.threads.com/@bokmanhi/post/De2oZTwj_vP","마퀴":"https://www.threads.com/@bokmanhi/post/De2oZTwj_vP","카운트업":"https://www.threads.com/@ai_cpocoder/post/Dey9aa8DyYb","스태거":"https://www.threads.com/@ai_onepage/post/DfHl15GAhu3","패럴랙스":"https://www.threads.com/@ww0ny/post/De2uPpEky11","슬라이드 인":"https://www.threads.com/@ww0ny/post/De2uPpEky11","타이핑 효과":"https://www.threads.com/@vibe.bizness/post/De6IY5ZD1Oj","블러":"https://www.threads.com/@vibe.bizness/post/De6IY5ZD1Oj","감소 모션":"https://www.threads.com/@aitoolshup/post/DfHVup5jXlv","패닝":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","틸트":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","돌리 인":"https://www.threads.com/@liorasolveil/post/DeVmPbsAoLH","돌리":"https://www.threads.com/@liorasolveil/post/DeVmPbsAoLH","줌 인":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","트래킹 샷":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","오비트":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","크레인 샷":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","크레인 업":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","돌리 줌":"https://www.threads.com/@inve_insight/post/DeaJpCEExFM","카메라 무빙":"https://www.threads.com/@liorasolveil/post/DeVmPbsAoLH"};
 function demoFor(t){
  const stage=(inner)=>`<div class="stage">${inner}</div>`;
  const dish=(txt,cls)=>stage(`<div class="box ${cls}" style="width:auto;min-width:90px;padding:10px 14px;font-size:16px">🍜 ${txt}</div>`);
@@ -316,15 +322,15 @@ function demoFor(t){
   case "모핑": return stage(`<div class="box anim-morph">🍜→🥟</div>`);
   case "오버슈트": return dish("주문 버튼 탄성 초과","demo-spring");
   case "스쿼시 앤 스트레치": return stage(`<div class="ball anim-bounce">🥟</div><span style="font-size:13px">반죽 찌그러졌다 늘어남</span>`);
-  case "패닝": return dish("식탁 좌우 훑기","anim-pan");
-  case "트래킹 샷": return stage(`<div style="display:flex;gap:6px;align-items:center"><span>📷</span><div class="box anim-pan">🏃 서빙 따라감</div></div>`);
+  case "패닝": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:scenePan 4s ease-in-out infinite"><span style="font-size:36px">🏔🏠🌳🏠🌳</span></div><span class="cam-label">📷 고정, 좌우 회전 → 장면이 옆으로 흐름</span></div>`);
+  case "트래킹 샷": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:scenePan 4s ease-in-out infinite"><span style="font-size:36px">🏃</span></div><span class="cam-label">주인공은 중앙 고정, 배경만 흐름 = 따라감</span></div>`);
   case "짐벌 샷": return dish("흔들림 없이 서빙 따라감","anim-pan");
-  case "틸트": return dish("메뉴에서 음식으로 상하","anim-tilt");
-  case "크레인 샷": return stage(`<div style="display:flex;gap:8px;align-items:center"><div style="width:4px;height:80px;background:#222"></div><div class="box anim-tilt">📷 크레인 상하</div></div>`);
-  case "돌리": return dish("음식에 카메라 다가감","anim-dolly");
+  case "틸트": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:sceneTilt 4s ease-in-out infinite"><span style="font-size:36px">☁️<br>🏠</span></div><span class="cam-label">📷 고정, 상하 회전 → 장면이 위아래로 흐름</span></div>`);
+  case "크레인 샷": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:sceneTilt 4s ease-in-out infinite"><span style="font-size:36px">🏙</span></div><span class="cam-label">크레인: 위에서 아래로, 높이 자체가 이동</span></div>`);
+  case "돌리": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:sceneDolly 3.6s ease-in-out infinite"><span style="font-size:36px">🍜</span></div><span class="cam-label">📷가 음식에 다가감 → 장면이 커짐</span></div>`);
   case "드론 샷": return dish("🚁 식당 공중 뷰","anim-tilt");
   case "클로즈업": return plate("음식 클로즈업","anim-dolly");
-  case "오비트": return stage(`<div class="bullet-subject">🍜</div><div class="bullet-cam">📷</div><div class="bullet-cam" style="animation-delay:1.2s">📷</div><span style="font-size:13px">접시 주위를 회전</span>`);
+  case "오비트": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:sceneOrbit 4s ease-in-out infinite"><span style="font-size:36px">🍜</span></div><span class="cam-label">오비트: 접시 주위를 카메라가 돎</span></div>`);
   case "핸드헬드": return dish("📷 손들고 찍은 음식 영상","anim-shake");
   case "카운트업": return stage(`<span class="demo-count" data-count="100">0</span><span style="font-size:13px">오늘 판매량 카운트업</span>`);
   case "디졸브": return stage(`<div class="demo-cross"><div style="background:#ffb27a;display:flex;align-items:center;justify-content:center">🍜</div><div style="background:#7ab8ff;display:flex;align-items:center;justify-content:center">🍕</div></div>`);
@@ -394,9 +400,9 @@ function demoFor(t){
   case "POV 샷": return stage(`<div style="font-size:14px">👀 손님 눈높이로 보는 메뉴판</div>`);
   case "에스타블리싱 샷": return stage(`<div style="width:95%;height:70px;background:#ddd;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px">🏙 식당 외관 소개 넓은 샷</div>`);
   case "불릿 타임": return stage(`<div class="bullet-subject">🍜</div><div class="bullet-cam">📷</div><div class="bullet-cam" style="animation-delay:1.2s">📷</div><span style="font-size:13px">음식은 멈춤, 카메라만 회전</span>`);
-  case "줌 인": return stage(`<div style="animation:dolly 2s infinite"><div style="width:120px;height:60px;background:#ddd;border-radius:10px;display:flex;align-items:center;justify-content:center">🍜 장면 전체가 커짐 (렌즈)</div></div>`);
+  case "줌 인": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:sceneDolly 2s ease-in-out infinite"><span style="font-size:36px">🍜</span></div><span class="cam-label">줌 인: 렌즈 확대, 카메라는 제자리</span></div>`);
   case "줌 아웃": return stage(`<div style="animation:dolly 2s infinite reverse"><div style="width:120px;height:60px;background:#ddd;border-radius:10px;display:flex;align-items:center;justify-content:center">🍜 장면 전체가 작아짐 (렌즈)</div></div>`);
-  case "돌리 인": return dish("👤 카메라가 음식에 다가감","anim-dolly");
+  case "돌리 인": return stage(`<div class="cam-frame"><div class="cam-scene" style="animation:sceneDolly 3.6s ease-in-out infinite"><span style="font-size:36px">🍜</span></div><span class="cam-label">돌리 인: 카메라 전진, 긴장감 상승</span></div>`);
   case "돌리 아웃": return dish("👤 카메라가 음식에서 멀어짐","anim-dolly");
   case "크레인 업": return dish("📷 위로 상승하며 식당 전경","anim-tilt");
   case "비네트": return stage(`<div class="box">🍜 중심</div><div class="demo-vignette"></div>`);
@@ -422,7 +428,7 @@ function demoFor(t){
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
   const list=DATA.filter(d=>(cat==="all"||d[0]===cat)&&(!q||(d[1]+d[2]+d[3]+d[4]).toLowerCase().includes(q)));
-  const cardHtml=(d)=>`<article class="card"><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></div><button class="copy example-toggle">예시 접기 ▴</button><div class="demo-wrap" style="display:block">${demoFor(d[1])}</div></article>`;
+  const cardHtml=(d)=>`<article class="card"><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button>${REF[d[1]]?`<div style="margin-top:8px;font-size:.9em">🎬 실제 예시: <a href="${REF[d[1]]}" target="_blank" rel="noopener">Threads 원본 영상 보기</a> (링크는 원작자 게시물로 이동, 영상 자체를 복사하지 않음)</div>`:``}</div><button class="copy example-toggle">예시 접기 ▴</button><div class="demo-wrap" style="display:block">${demoFor(d[1])}</div></article>`;
   let html="";
   if(cat==="all"&&!q){["ui","motion","camera","effect","web"].forEach(c=>{const sub=list.filter(d=>d[0]===c); if(sub.length) html+=`<h2 class="cat-head">${catName[c]} · ${sub.length}개</h2>`+sub.map(cardHtml).join("");});}
   else html=list.map(cardHtml).join("");
