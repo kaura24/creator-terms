@@ -19,8 +19,13 @@ button.active{background:#222;color:#fff;border-color:#222}
 .fontbox{margin-left:auto;display:flex;gap:8px;align-items:center;font-size:14px;color:#555}
 .fontbox input{width:130px}
 main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.card{background:#fff;border:1px solid #e3ddcd;border-radius:16px;padding:16px}
+.grid{display:flex;flex-direction:column;gap:14px}
+.card{background:#fff;border:1px solid #e3ddcd;border-radius:16px;padding:16px;display:flex;gap:18px;align-items:flex-start}
+.card .demo-wrap{width:260px;flex-shrink:0}
+.card .text-wrap{flex:1;min-width:0}
+@media(max-width:700px){.card{flex-direction:column}.card .demo-wrap{width:100%}}
+.cat-head{font-size:1.25em;margin:26px 0 10px}
+.cat-head:first-child{margin-top:6px}
 .tag{display:inline-block;font-size:13px;background:#FFF3B0;border:1px solid #FFBC00;border-radius:999px;padding:2px 9px;margin-bottom:8px}
 .card h2{font-size:1.05em;margin:0 0 6px}
 .card h2 span{color:#888;font-weight:500;font-size:.85em}
@@ -66,6 +71,31 @@ main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .demo-glow{font-size:22px;font-weight:800;animation:glow 2s infinite}
 .demo-count{font-size:28px;font-weight:800}
 .demo-stagger{display:flex;gap:10px}.demo-stagger i{width:26px;height:26px;background:#FFBC00;border-radius:50%;animation:slide 1.8s infinite}.demo-stagger i:nth-child(2){animation-delay:.2s}.demo-stagger i:nth-child(3){animation-delay:.4s}
+.demo-ui{width:90%;background:#fff;border-radius:10px;padding:10px;font-size:14px;text-align:left}
+.demo-ui .crumb{color:#555}.demo-ui .crumb b{color:#222}
+.demo-scroll{width:90%;height:90px;overflow:hidden;background:#fff;border-radius:10px;padding:8px;font-size:13px}
+.demo-scroll div{animation:scrollup 4s linear infinite}
+@keyframes scrollup{0%{transform:translateY(60px)}100%{transform:translateY(-60px)}}
+.demo-marquee{width:100%;overflow:hidden;white-space:nowrap;font-size:16px;font-weight:700}
+.demo-marquee span{display:inline-block;animation:marq 4s linear infinite}
+@keyframes marq{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.demo-pulse{width:44px;height:44px;background:#FFBC00;border-radius:50%;animation:pulse 1.4s infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.6}100%{transform:scale(1);opacity:1}}
+.demo-spring{animation:spring 1.8s infinite}
+@keyframes spring{0%,100%{transform:scale(1)}30%{transform:scale(1.25,.75)}50%{transform:scale(.85,1.2)}70%{transform:scale(1.1,.9)}}
+.demo-arc{animation:arc 2.4s ease-in-out infinite}
+@keyframes arc{0%,100%{transform:translate(-50px,10px)}50%{transform:translate(0,-30px)}100%{transform:translate(50px,10px)}}
+.demo-jump{animation:jumpstep 2s steps(3) infinite}
+@keyframes jumpstep{0%{transform:translateX(-55px)}33%{transform:translateX(0)}66%{transform:translateX(55px)}100%{transform:translateX(-55px)}}
+.demo-vignette{position:absolute;inset:0;box-shadow:inset 0 0 40px 20px rgba(0,0,0,.55);border-radius:12px}
+.demo-lower{position:absolute;left:10px;bottom:10px;background:#222;color:#fff;padding:6px 12px;border-radius:6px;font-size:13px}
+.demo-type{font-size:18px;font-weight:700;overflow:hidden;white-space:nowrap;animation:typing 2.8s steps(12) infinite}
+@keyframes typing{0%{width:0}60%,100%{width:100%}}
+.demo-sticky{width:90%;height:90px;overflow:auto;background:#fff;border-radius:10px;padding:8px;font-size:13px}
+.demo-sticky b{position:sticky;top:0;background:#FFBC00;padding:2px 8px;border-radius:6px;display:block}
+.demo-pop{position:absolute;top:8px;right:10px;background:#fff;border:1px solid #ddd;border-radius:10px;padding:8px 10px;font-size:13px;display:none;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.demo-sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:10px;font-size:14px;display:none;border-radius:12px 12px 0 0}
+.demo-drop{position:absolute;top:34px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #ddd;border-radius:10px;padding:6px 10px;font-size:13px;display:none}
 small.note{display:block;color:#777;margin-top:16px}
 footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:14px}
 @media(max-width:600px){.fontbox{margin-left:0}}
@@ -77,7 +107,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:1
 <p class="lead">“좀 더 세련되게” 말고, 이름으로 요청하자. UI · 모션그래픽 · 촬영 · 효과 용어를 의미 중심으로 정리했다. 원하는 용어를 찾고, 아래 요청 문장을 복사해서 AI나 제작자에게 그대로 붙여넣으면 된다.</p>
 </header>
 <div class="controls">
-<input id="q" type="search" placeholder="용어 검색 — 예: 토스트, 패닝, 스태거">
+<input id="q" type="search" placeholder="검색은 선택 사항 — 카테고리를 누르면 목록이 전부 아래에 뜬다">
 <button data-cat="all" class="active">전체</button>
 <button data-cat="ui">UI 구조 · 움직임</button>
 <button data-cat="motion">모션그래픽</button>
@@ -256,13 +286,97 @@ function demoFor(name){
     case "타임랩스": return stage(`<div class="box anim-fade">☀ → 🌙</div>`);
     case "렛터박스": return stage(`<div class="box">영화</div><div class="demo-bars top"></div><div class="demo-bars bottom"></div>`);
     case "모션 블러": return stage(`<div class="ball anim-pan" style="box-shadow:-18px 0 0 rgba(255,122,69,.35),-36px 0 0 rgba(255,122,69,.15)"></div>`);
+    case "브레드크럼": return stage(`<div class="demo-ui"><span class="crumb">홈 &gt; <b>목록</b> &gt; 글</span></div>`);
+    case "인피니트 스크롤": return stage(`<div class="demo-scroll"><div>글 1<br>글 2<br>글 3<br>글 4<br>글 5</div></div>`);
+    case "풀다운 새로고침": return stage(`<div class="box" style="animation:tilt 1.6s ease-in-out infinite">↓ 당기기</div>`);
+    case "팝오버": return stage(`<div class="demo-pop">추가 옵션</div>`)+b("pop");
+    case "바텀 시트": return stage(`<div class="demo-sheet">아래에서 올라온 패널</div>`)+b("sheet");
+    case "드롭다운": return stage(`<div class="demo-drop">최신순<br>인기순</div>`)+b("drop");
+    case "사이드바": return stage(`<div style="display:flex;width:90%;height:80px;background:#fff;border-radius:10px;overflow:hidden;font-size:13px"><div style="width:45%;background:#222;color:#fff;padding:8px">메뉴<br>홈<br>목록</div><div style="padding:8px">본문</div></div>`);
+    case "히어로 섹션": return stage(`<div style="text-align:center"><b style="font-size:20px">큰 제목</b><br><button class="copy">시작하기</button></div>`);
+    case "빈 상태": return stage(`<div class="demo-ui" style="text-align:center;color:#777">📭<br>아직 내용이 없어요</div>`);
+    case "OG 이미지": return stage(`<div class="demo-ui"><div style="height:40px;background:#FFBC00;border-radius:8px"></div><b>공유 미리보기 제목</b></div>`);
+    case "OG 타이틀": return stage(`<div class="demo-ui">🔗 링크 공유<br><b>공유할 때 뜨는 제목</b></div>`);
+    case "페이지네이션": return stage(`<div><button class="copy" data-tab="1">1</button> <button class="copy" data-tab="2">2</button> <button class="copy" data-tab="3">3</button></div>`);
+    case "스크롤 트리거": return stage(`<div class="box" style="animation:slide 2.4s infinite">화면에 보일 때 등장</div>`);
+    case "키프레임": return stage(`<div style="position:relative;width:80%;height:60px"><span style="position:absolute;left:0;top:20px">●</span><span style="position:absolute;left:45%;top:0">●</span><span style="position:absolute;right:0;top:20px">●</span><div class="ball" style="position:absolute;animation:pan 2.4s infinite"></div></div>`);
+    case "패럴랙스": return stage(`<div class="ball" style="animation:pan 4s infinite"></div><div class="ball" style="width:20px;height:20px;animation:pan 2s infinite"></div>`);
+    case "마스크": return stage(`<div style="width:80px;height:80px;border-radius:50%;overflow:hidden;background:linear-gradient(45deg,#FFBC00,#6b4f2a)"></div>`);
+    case "앤티시페이션": return stage(`<div class="ball" style="animation:bounce 1.8s infinite">점프 전 웅크림 → 점프</div>`);
+    case "팔로우스루": return stage(`<div style="display:flex;gap:6px;align-items:center"><div class="ball"></div><div class="ball" style="width:24px;height:24px;opacity:.6;animation:pan 1.8s infinite"></div><div class="ball" style="width:16px;height:16px;opacity:.35"></div></div>`);
+    case "타이밍": return stage(`<div style="display:flex;flex-direction:column;gap:8px;width:80%"><div class="ball" style="animation:pan 4s infinite"></div><div class="ball" style="animation:pan 1.2s infinite"></div></div>`);
+    case "아크": return stage(`<div class="ball demo-arc"></div>`);
+    case "스페이싱": return stage(`<div style="display:flex;gap:4px"><i class="ball" style="width:18px;height:18px"></i><i class="ball" style="width:18px;height:18px"></i><i class="ball" style="width:18px;height:18px"></i><span style="font-size:13px">→ 간격이 벌어지며 빨라짐</span></div>`);
+    case "슬로 인": return stage(`<div class="ball" style="animation:pan 2.4s cubic-bezier(.6,0,1,.4) infinite"></div>`);
+    case "베지어 커브": return stage(`<div style="font-size:14px">속도 곡선 ↗<br><span style="color:#6b4f2a">ease-out: 빨랐다가 부드럽게 멈춤</span></div>`);
+    case "트윈": return stage(`<div class="box" style="animation:morph 2.4s infinite">A → B 자동 채움</div>`);
+    case "펄스": return stage(`<div class="demo-pulse"></div>`);
+    case "바운스": return stage(`<div class="ball anim-bounce"></div>`);
+    case "스프링": return stage(`<div class="box demo-spring">탄성</div>`);
+    case "핑퐁": return stage(`<div class="ball" style="animation:pan 2s ease-in-out infinite alternate"></div>`);
+    case "리빌": return stage(`<div class="box" style="animation:slide 2s infinite">드러남</div>`);
+    case "롱테이크": return stage(`<div class="box anim-pan">끊지 않고 계속 ▶ 00:12</div>`);
+    case "점프 컷": return stage(`<div class="box demo-jump">툭! 툭! 위치 점프</div>`);
+    case "매치 컷": return stage(`<div class="box" style="animation:morph 1.6s steps(2) infinite">● → ■ 모양으로 잇기</div>`);
+    case "B롤": return stage(`<div style="position:relative;width:90%;height:80px;background:#ddd;border-radius:10px"><div style="position:absolute;right:8px;bottom:8px;width:70px;height:45px;background:#FFBC00;border-radius:8px;font-size:12px;display:flex;align-items:center;justify-content:center">보조 영상</div><span style="position:absolute;left:8px;top:8px;font-size:13px">본 장면</span></div>`);
+    case "와이드 샷": return stage(`<div style="width:95%;height:70px;background:#ddd;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px">장소 전체가 보이는 넓은 화면</div>`);
+    case "오버숄더 샷": return stage(`<div style="display:flex;align-items:center;gap:10px"><div style="width:50px;height:50px;background:#6b4f2a;border-radius:50%"></div><div>상대방 대화</div></div>`);
+    case "넘버 롤링": return stage(`<div style="height:36px;overflow:hidden;font-size:28px;font-weight:800"><div style="animation:scrollup 2s linear infinite">0<br>1<br>2<br>3<br>9</div></div>`);
+    case "리버스": return stage(`<div class="ball" style="animation:pan 2.4s linear infinite reverse"></div>`);
+    case "그린 스크린": return stage(`<div style="width:90%;height:80px;background:#2ecc71;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px">초록 배경 → 도시 배경으로 합성</div>`);
+    case "컬러 그레이딩": return stage(`<div class="box" style="animation:fade 3s infinite">따뜻한 톤 ↔ 차가운 톤</div>`);
+    case "감소 모션": return stage(`<div class="box">동작 줄이기 ON → 움직임 없음</div>`);
+    case "휩 팬": return stage(`<div class="box" style="animation:pan .7s ease-in-out infinite">휙!</div>`);
+    case "크래시 줌": return stage(`<div class="box" style="animation:dolly .8s ease-in-out infinite">급격히 당김</div>`);
+    case "돌리 줌": return stage(`<div class="box" style="animation:dolly 2.4s infinite">배경만 왜곡</div>`);
+    case "랙 포커스": return stage(`<div style="font-size:16px"><span style="filter:blur(0)">앞 사람 선명</span> → <span style="filter:blur(2px)">뒷사람 선명</span></div>`);
+    case "더치 앵글": return stage(`<div class="box" style="transform:rotate(-18deg)">기울인 화면</div>`);
+    case "FPV 드론 샷": return stage(`<div class="box" style="animation:pan 1s linear infinite">💨 1인칭 비행</div>`);
+    case "스피드 램프": return stage(`<div class="ball" style="animation:pan 3s cubic-bezier(.1,.8,.9,.2) infinite">느림 → 빠름</div>`);
+    case "프리즈 프레임": return stage(`<div class="box">⏸ 멈춘 장면</div>`);
+    case "롤": return stage(`<div class="box" style="animation:spin 2.4s linear infinite">좌우 기울이기</div>`);
+    case "트럭": return stage(`<div class="box anim-pan">좌우 평행 이동</div>`);
+    case "페데스탈": return stage(`<div class="box anim-tilt">상하 이동</div>`);
+    case "스태틱 샷": return stage(`<div class="box">고정 📷 움직임 없음</div>`);
+    case "미디엄 샷": return stage(`<div style="width:70px;height:80px;background:#ddd;border-radius:10px;display:flex;align-items:flex-end;justify-content:center">허리 위</div>`);
+    case "로우 앵글": return stage(`<div style="font-size:28px">▲ 아래에서 올려다봄</div>`);
+    case "하이 앵글": return stage(`<div style="font-size:28px">▼ 위에서 내려다봄</div>`);
+    case "POV 샷": return stage(`<div style="font-size:14px">👀 주인공 눈높이 화면</div>`);
+    case "에스타블리싱 샷": return stage(`<div style="width:95%;height:70px;background:#ddd;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px">🏙 장소 소개 넓은 샷</div>`);
+    case "불릿 타임": return stage(`<div class="box anim-orbit">시간 멈춤 + 회전</div>`);
+    case "줌 인": return stage(`<div class="box" style="animation:dolly 2s infinite">렌즈로 당김</div>`);
+    case "줌 아웃": return stage(`<div class="box" style="animation:dolly 2s infinite reverse">렌즈로 넓힘</div>`);
+    case "돌리 인": return stage(`<div class="box" style="animation:dolly 2.4s infinite">카메라가 다가감</div>`);
+    case "돌리 아웃": return stage(`<div class="box" style="animation:dolly 2.4s infinite reverse">카메라가 멀어짐</div>`);
+    case "크레인 업": return stage(`<div class="box anim-tilt">위로 상승</div>`);
+    case "비네트": return stage(`<div class="box">중심</div><div class="demo-vignette"></div>`);
+    case "LUT": return stage(`<div style="display:flex;width:90%;height:70px;border-radius:10px;overflow:hidden"><div style="flex:1;background:#ccc;display:flex;align-items:center;justify-content:center;font-size:13px">보정 전</div><div style="flex:1;background:#FFBC00;display:flex;align-items:center;justify-content:center;font-size:13px">보정 후</div></div>`);
+    case "로어 서드": return stage(`<div style="position:relative;width:95%;height:80px;background:#ddd;border-radius:10px"><div class="demo-lower">홍길동 · 크리에이터</div></div>`);
+    case "스태빌라이제이션": return stage(`<div class="box" style="animation:pan 4s ease-in-out infinite">흔들림 보정 후 부드러움</div>`);
+    case "컷": return stage(`<div class="box" style="animation:fade 1s steps(2) infinite">바로 자르기 ✂</div>`);
+    case "스무스 스크롤": return stage(`<div class="ball" style="animation:pan 3s ease-in-out infinite">부드럽게 이동</div>`);
+    case "스티키 헤더": return stage(`<div class="demo-sticky"><b>📌 상단 메뉴 (따라다님)</b><br>내용 1<br>내용 2<br>내용 3<br>내용 4</div>`);
+    case "패럴랙스 스크롤": return stage(`<div class="ball" style="animation:pan 4s infinite"></div><div class="ball" style="width:20px;height:20px;animation:pan 2s infinite"></div>`);
+    case "리빌 온 스크롤": return stage(`<div class="box" style="animation:slide 2s infinite">스크롤하면 드러남</div>`);
+    case "마퀴": return stage(`<div class="demo-marquee"><span>할인 중 · 할인 중 · 할인 중 ·&nbsp;</span></div>`);
+    case "페이지 전환": return stage(`<div class="box" style="animation:fade 2.4s infinite">페이지 A → B 페이드</div>`);
+    case "프리로더": return stage(`<div class="spin"></div><span style="margin-left:8px;font-size:14px">로딩 중…</span>`);
+    case "백 투 탑": return stage(`<div><button class="copy" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 맨 위로</button></div>`);
+    case "타이핑 효과": return stage(`<div class="demo-type">안녕하세요!</div>`);
+    case "카드 리프트": return stage(`<div class="box" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 10px 20px rgba(0,0,0,.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">마우스 올려봐</div>`);
+    case "언더라인 애니메이션": return stage(`<span style="border-bottom:3px solid #FFBC00">링크 밑줄이 그어짐</span>`);
+    case "줌 온 호버": return stage(`<div class="box" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform=''">마우스 올려봐</div>`);
     default: return stage(`<div class="box anim-fade">▶ 예시</div>`);
   }
 }
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
   const list=DATA.filter(d=>(cat==="all"||d[0]===cat)&&(!q||(d[1]+d[2]+d[3]+d[4]).toLowerCase().includes(q)));
-  document.getElementById("grid").innerHTML=list.map(d=>`<article class="card"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p>${demoFor(d[1])}<div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></article>`).join("")||"<p>검색 결과가 없어. 다른 단어로 검색해봐.</p>";
+  const cardHtml=(d)=>`<article class="card"><div class="demo-wrap">${demoFor(d[1])}</div><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></div></article>`;
+  let html="";
+  if(cat==="all"&&!q){["ui","motion","camera","effect","web"].forEach(c=>{const sub=list.filter(d=>d[0]===c); if(sub.length) html+=`<h2 class="cat-head">${catName[c]} · ${sub.length}개</h2>`+sub.map(cardHtml).join("");});}
+  else html=list.map(cardHtml).join("");
+  document.getElementById("grid").innerHTML=html||"<p>검색 결과가 없어. 카테고리를 누르면 해당 목록이 전부 아래에 뜬다.</p>";
   document.getElementById("count").textContent=`총 ${DATA.length}개 용어 중 ${list.length}개 표시 중`;
   document.querySelectorAll("[data-demo]").forEach(btn=>btn.onclick=()=>{
     const card=btn.closest(".card"); const t=btn.dataset.demo;
@@ -270,6 +384,9 @@ function render(){
     if(t==="toast"){const el=card.querySelector(".demo-toast"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000);}
     if(t==="modal") show(".demo-modal"); if(t==="drawer") show(".demo-drawer"); if(t==="tip"){const el=card.querySelector(".demo-tip"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000);}
     if(t==="acc"){const p=card.querySelector(".demo-acc p"); p.style.display=p.style.display==="block"?"none":"block";}
+    if(t==="pop"){const el=card.querySelector(".demo-pop"); el.style.display=el.style.display==="block"?"none":"block";}
+    if(t==="sheet"){const el=card.querySelector(".demo-sheet"); el.style.display=el.style.display==="block"?"none":"block";}
+    if(t==="drop"){const el=card.querySelector(".demo-drop"); el.style.display=el.style.display==="block"?"none":"block";}
     if(t==="toggle"){const s=btn.nextElementSibling; const on=s.textContent.includes("OFF"); s.textContent=on?"● ON":"● OFF";}
   });
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>{btn.closest(".demo-tabs").querySelector(".tabbody").textContent=btn.dataset.tab+" 내용";});
