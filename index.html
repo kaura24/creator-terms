@@ -20,8 +20,9 @@ button.active{background:#222;color:#fff;border-color:#222}
 .fontbox input{width:130px}
 main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .grid{display:flex;flex-direction:column;gap:14px}
-.card{background:#fff;border:1px solid #e3ddcd;border-radius:16px;padding:16px;display:flex;gap:18px;align-items:flex-start}
-.card .demo-wrap{width:260px;flex-shrink:0}
+.card{background:#fff;border:1px solid #e3ddcd;border-radius:16px;padding:16px}
+.card .demo-wrap{width:100%;margin-top:12px}
+.example-toggle{width:100%;text-align:left;background:#222;color:#fff;border-color:#222;font-weight:700;margin-top:12px}
 .card .text-wrap{flex:1;min-width:0}
 @media(max-width:700px){.card{flex-direction:column}.card .demo-wrap{width:100%}}
 .cat-head{font-size:1.25em;margin:26px 0 10px}
@@ -114,6 +115,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:1
 <button data-cat="camera">촬영 기법</button>
 <button data-cat="effect">효과</button>
 <button data-cat="web">웹사이트 움직임</button>
+<button id="expandAll">예시 전부 펼치기</button>
 <div class="fontbox"><label for="fs">글자 크기</label><input id="fs" type="range" min="14" max="32" value="18"><span id="fsval">18px</span></div>
 </div>
 <main><div class="grid" id="grid"></div><small class="note" id="count"></small></main>
@@ -372,7 +374,7 @@ function demoFor(name){
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
   const list=DATA.filter(d=>(cat==="all"||d[0]===cat)&&(!q||(d[1]+d[2]+d[3]+d[4]).toLowerCase().includes(q)));
-  const cardHtml=(d)=>`<article class="card"><div class="demo-wrap">${demoFor(d[1])}</div><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></div></article>`;
+  const cardHtml=(d)=>`<article class="card"><div class="text-wrap"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></div><button class="copy example-toggle">예시 보기 ▾ — 아래에 예시가 펼쳐진다</button><div class="demo-wrap" style="display:none">${demoFor(d[1])}</div></article>`;
   let html="";
   if(cat==="all"&&!q){["ui","motion","camera","effect","web"].forEach(c=>{const sub=list.filter(d=>d[0]===c); if(sub.length) html+=`<h2 class="cat-head">${catName[c]} · ${sub.length}개</h2>`+sub.map(cardHtml).join("");});}
   else html=list.map(cardHtml).join("");
@@ -391,8 +393,15 @@ function render(){
   });
   document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>{btn.closest(".demo-tabs").querySelector(".tabbody").textContent=btn.dataset.tab+" 내용";});
   document.querySelectorAll("[data-count]").forEach(el=>{let n=0; const target=+el.dataset.count; clearInterval(el._t); el._t=setInterval(()=>{n+=2; if(n>=target){n=target; clearInterval(el._t);} el.textContent=n;},30);});
+  document.querySelectorAll(".example-toggle").forEach(btn=>btn.onclick=()=>{
+    const wrap=btn.nextElementSibling; const open=wrap.style.display!=="none";
+    wrap.style.display=open?"none":"block";
+    btn.textContent=open?"예시 보기 ▾ — 아래에 예시가 펼쳐진다":"예시 접기 ▴";
+    if(!open){wrap.querySelectorAll("[data-count]").forEach(el=>{let n=0; const target=+el.dataset.count; clearInterval(el._t); el._t=setInterval(()=>{n+=2; if(n>=target){n=target; clearInterval(el._t);} el.textContent=n;},30);});}
+  });
 }
 document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("active",x===b));render()});
+document.getElementById("expandAll").onclick=()=>{const wraps=document.querySelectorAll(".demo-wrap"); const anyHidden=[...wraps].some(w=>w.style.display==="none"); wraps.forEach(w=>w.style.display=anyHidden?"block":"none"); document.querySelectorAll(".example-toggle").forEach(b=>b.textContent=anyHidden?"예시 접기 ▴":"예시 보기 ▾ — 아래에 예시가 펼쳐진다"); document.getElementById("expandAll").textContent=anyHidden?"예시 전부 접기":"예시 전부 펼치기";};
 document.getElementById("q").oninput=render;
 const fs=document.getElementById("fs");fs.oninput=()=>{document.documentElement.style.setProperty("--fs",fs.value+"px");document.getElementById("fsval").textContent=fs.value+"px"};
 render();
