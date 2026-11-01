@@ -28,6 +28,44 @@ main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .prompt{background:#f4f2ea;border-radius:10px;padding:10px 12px;font-size:.92em}
 .prompt b{display:block;color:#666;font-size:.85em;margin-bottom:2px}
 .copy{margin-top:10px}
+.stage{height:110px;background:#efece2;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.stage .box{width:52px;height:52px;background:#ff7a45;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px}
+.stage .ball{width:36px;height:36px;background:#ff7a45;border-radius:50%}
+.stage .bar{width:70%;height:12px;background:#ddd;border-radius:99px;overflow:hidden}
+.stage .bar i{display:block;height:100%;width:40%;background:#ff7a45;border-radius:99px}
+@keyframes fade{0%,100%{opacity:0}50%{opacity:1}}
+@keyframes slide{0%,100%{transform:translateY(24px);opacity:0}50%{transform:translateY(0);opacity:1}}
+@keyframes pan{0%,100%{transform:translateX(-60px)}50%{transform:translateX(60px)}}
+@keyframes tilt{0%,100%{transform:translateY(-28px)}50%{transform:translateY(28px)}}
+@keyframes dolly{0%,100%{transform:scale(.6)}50%{transform:scale(1.15)}}
+@keyframes orbit{from{transform:rotate(0) translateX(55px) rotate(0)}to{transform:rotate(360deg) translateX(55px) rotate(-360deg)}}
+@keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(2px,-2px)}50%{transform:translate(-2px,2px)}75%{transform:translate(2px,1px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes morph{0%,100%{border-radius:50%}50%{border-radius:8px;transform:rotate(45deg)}}
+@keyframes bounce{0%,100%{transform:translateY(0) scale(1,1)}30%{transform:translateY(28px) scale(1.2,.7)}50%{transform:translateY(-30px) scale(.9,1.1)}70%{transform:translateY(28px) scale(1.15,.8)}}
+@keyframes shimmer{from{background-position:-200px 0}to{background-position:200px 0}}
+@keyframes cross{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes wipe{0%,100%{transform:translateX(-100%)}50%{transform:translateX(0)}}
+@keyframes glow{0%,100%{text-shadow:0 0 4px #ffb27a}50%{text-shadow:0 0 18px #ff7a45}}
+.anim-fade{animation:fade 2.4s infinite}.anim-slide{animation:slide 2.4s infinite}.anim-pan{animation:pan 3s ease-in-out infinite}.anim-tilt{animation:tilt 3s ease-in-out infinite}.anim-dolly{animation:dolly 3s ease-in-out infinite}.anim-orbit{animation:orbit 3s linear infinite}.anim-shake{animation:shake .4s infinite}.anim-spin{animation:spin 1.2s linear infinite}.anim-morph{animation:morph 2.4s infinite}.anim-bounce{animation:bounce 1.8s infinite}.anim-smooth{animation:pan 4s ease-in-out infinite}
+.skel{width:80%;display:flex;flex-direction:column;gap:8px}.skel div{height:12px;border-radius:99px;background:linear-gradient(90deg,#ddd 25%,#f2f2f2 50%,#ddd 75%);background-size:200px 100%;animation:shimmer 1.4s infinite}
+.spin{width:34px;height:34px;border:4px solid #ddd;border-top-color:#ff7a45;border-radius:50%;animation:spin 1s linear infinite}
+.progress{width:80%;height:14px;background:#ddd;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:#ff7a45;animation:prog 2.5s ease-in-out infinite}@keyframes prog{0%{width:0}70%,100%{width:100%}}
+.demo-toast{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:8px 14px;border-radius:99px;font-size:14px;display:none}
+.demo-modal{position:absolute;inset:18px;background:#fff;border-radius:12px;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.demo-drawer{position:absolute;top:0;bottom:0;left:0;width:55%;background:#fff;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:4px 0 16px rgba(0,0,0,.15)}
+.demo-tip{position:absolute;top:8px;background:#222;color:#fff;padding:4px 10px;border-radius:8px;font-size:13px;display:none}
+.demo-badge{position:relative;font-size:28px}.demo-badge b{position:absolute;top:-8px;right:-10px;background:#e33;color:#fff;font-size:12px;border-radius:99px;padding:1px 6px}
+.demo-acc{width:85%;background:#fff;border-radius:10px;padding:8px 12px;font-size:15px;text-align:left}.demo-acc p{display:none;margin:6px 0 0;color:#555}
+.demo-tabs{width:90%}.demo-tabs .tabbody{background:#fff;border-radius:10px;padding:8px;margin-top:6px;font-size:15px}
+.demo-grain{position:absolute;inset:0;opacity:.25;background-image:radial-gradient(#000 1px,transparent 1px);background-size:6px 6px;animation:shake .3s infinite}
+.demo-bars{position:absolute;left:0;right:0;height:16px;background:#000}.demo-bars.top{top:0}.demo-bars.bottom{bottom:0}
+.demo-cross{position:absolute;inset:0}.demo-cross div{position:absolute;inset:0}.demo-cross div:last-child{animation:cross 3s infinite}
+.demo-wipe{position:absolute;inset:0;background:#ff7a45;animation:wipe 3s ease-in-out infinite}
+.demo-blur{font-size:22px;font-weight:700;animation:blur 3s infinite}@keyframes blur{0%,100%{filter:blur(6px);opacity:.5}50%{filter:blur(0);opacity:1}}
+.demo-glow{font-size:22px;font-weight:800;animation:glow 2s infinite}
+.demo-count{font-size:28px;font-weight:800}
+.demo-stagger{display:flex;gap:10px}.demo-stagger i{width:26px;height:26px;background:#ff7a45;border-radius:50%;animation:slide 1.8s infinite}.demo-stagger i:nth-child(2){animation-delay:.2s}.demo-stagger i:nth-child(3){animation-delay:.4s}
 small.note{display:block;color:#777;margin-top:16px}
 footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:14px}
 @media(max-width:600px){.fontbox{margin-left:0}}
@@ -117,11 +155,64 @@ const DATA=[
 ];
 const catName={ui:"UI 구조 · 움직임",motion:"모션그래픽",camera:"촬영 기법",effect:"효과"};
 let cat="all";
+function demoFor(name){
+  const b=(t)=>`<button class="copy" data-demo="${t}">예시 보기</button>`;
+  const stage=(inner)=>`<div class="stage">${inner}</div>`;
+  switch(name){
+    case "토스트": return stage(`<div class="demo-toast">저장됐어요</div>`)+b("toast");
+    case "스낵바": return stage(`<div class="demo-toast">삭제됨 · 실행 취소</div>`)+b("toast");
+    case "모달": return stage(`<div class="demo-modal">정말 삭제할까요? [확인]</div>`)+b("modal");
+    case "드로어": return stage(`<div class="demo-drawer">☰ 메뉴</div>`)+b("drawer");
+    case "툴팁": return stage(`<span style="font-size:28px">ⓘ</span><span class="demo-tip">이 버튼은 저장 기능이에요</span>`)+b("tip");
+    case "배지": return stage(`<span class="demo-badge">🔔<b>3</b></span>`);
+    case "아코디언": return stage(`<div class="demo-acc">자주 묻는 질문 ▾<p>답변이 여기에 펼쳐집니다.</p></div>`)+b("acc");
+    case "탭": return stage(`<div class="demo-tabs"><button class="copy" data-tab="소개">소개</button> <button class="copy" data-tab="후기">후기</button><div class="tabbody">소개 내용</div></div>`);
+    case "스켈레톤 로딩": return stage(`<div class="skel"><div></div><div style="width:60%"></div><div style="width:75%"></div></div>`);
+    case "스피너": return stage(`<div class="spin"></div>`);
+    case "프로그레스 바": return stage(`<div class="progress"><i></i></div>`);
+    case "토글": return stage(`<button class="copy" data-demo="toggle">켜기 / 끄기</button><span style="margin-left:8px">● OFF</span>`);
+    case "캐러셀": return stage(`<div class="box anim-pan">1 → 2 → 3</div>`);
+    case "페이드 인 / 아웃": return stage(`<div class="box anim-fade">제목</div>`);
+    case "슬라이드 인": return stage(`<div class="box anim-slide">카드</div>`);
+    case "스태거": return stage(`<div class="demo-stagger"><i></i><i></i><i></i></div>`);
+    case "호버 효과": return stage(`<div class="box" onmouseover="this.style.transform='scale(1.2)';this.style.boxShadow='0 8px 20px rgba(0,0,0,.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">버튼</div>`);
+    case "이징": return stage(`<div class="ball" style="animation:pan 2s cubic-bezier(.2,.8,.2,1) infinite"></div>`);
+    case "루프": return stage(`<div class="ball anim-spin" style="border-radius:12px">↻</div>`);
+    case "모핑": return stage(`<div class="box anim-morph"></div>`);
+    case "오버슈트": case "스쿼시 앤 스트레치": return stage(`<div class="ball anim-bounce"></div>`);
+    case "패닝": case "트래킹 샷": case "짐벌 샷": return stage(`<div class="box anim-pan">🏃</div>`);
+    case "틸트": case "크레인 샷": return stage(`<div class="box anim-tilt">▲</div>`);
+    case "돌리": case "드론 샷": case "클로즈업": return stage(`<div class="box anim-dolly">👤</div>`);
+    case "오비트": return stage(`<div class="box anim-orbit">●</div>`);
+    case "핸드헬드": return stage(`<div class="box anim-shake">📷</div>`);
+    case "카운트업": return stage(`<span class="demo-count" data-count="100">0</span>`);
+    case "디졸브": return stage(`<div class="demo-cross"><div style="background:#ffb27a"></div><div style="background:#7ab8ff"></div></div>`);
+    case "와이프": return stage(`<div style="position:absolute;inset:0;background:#7ab8ff"></div><div class="demo-wipe"></div>`);
+    case "글로우": return stage(`<span class="demo-glow">빛나는 제목</span>`);
+    case "블러": return stage(`<span class="demo-blur">선명해지는 글자</span>`);
+    case "그레인": return stage(`<div class="box">필름</div><div class="demo-grain"></div>`);
+    case "슬로 모션": return stage(`<div class="ball" style="animation:pan 6s ease-in-out infinite"></div>`);
+    case "타임랩스": return stage(`<div class="box anim-fade">☀ → 🌙</div>`);
+    case "렛터박스": return stage(`<div class="box">영화</div><div class="demo-bars top"></div><div class="demo-bars bottom"></div>`);
+    case "모션 블러": return stage(`<div class="ball anim-pan" style="box-shadow:-18px 0 0 rgba(255,122,69,.35),-36px 0 0 rgba(255,122,69,.15)"></div>`);
+    default: return stage(`<div class="box anim-fade">▶ 예시</div>`);
+  }
+}
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
   const list=DATA.filter(d=>(cat==="all"||d[0]===cat)&&(!q||(d[1]+d[2]+d[3]+d[4]).toLowerCase().includes(q)));
-  document.getElementById("grid").innerHTML=list.map(d=>`<article class="card"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p><div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></article>`).join("")||"<p>검색 결과가 없어. 다른 단어로 검색해봐.</p>";
+  document.getElementById("grid").innerHTML=list.map(d=>`<article class="card"><span class="tag">${catName[d[0]]}</span><h2>${d[1]} <span>${d[2]}</span></h2><p class="mean">${d[3]}</p>${demoFor(d[1])}<div class="prompt"><b>AI 요청 문장</b>${d[4]}</div><button class="copy" onclick="navigator.clipboard.writeText('${d[4].replace(/'/g,"’")}');this.textContent='복사됨 ✓';setTimeout(()=>this.textContent='요청 문장 복사',1200)">요청 문장 복사</button></article>`).join("")||"<p>검색 결과가 없어. 다른 단어로 검색해봐.</p>";
   document.getElementById("count").textContent=`총 ${DATA.length}개 용어 중 ${list.length}개 표시 중`;
+  document.querySelectorAll("[data-demo]").forEach(btn=>btn.onclick=()=>{
+    const card=btn.closest(".card"); const t=btn.dataset.demo;
+    const show=(sel)=>{const el=card.querySelector(sel); if(el) el.style.display=el.style.display==="flex"?"none":"flex"};
+    if(t==="toast"){const el=card.querySelector(".demo-toast"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000);}
+    if(t==="modal") show(".demo-modal"); if(t==="drawer") show(".demo-drawer"); if(t==="tip"){const el=card.querySelector(".demo-tip"); el.style.display="block"; setTimeout(()=>el.style.display="none",2000);}
+    if(t==="acc"){const p=card.querySelector(".demo-acc p"); p.style.display=p.style.display==="block"?"none":"block";}
+    if(t==="toggle"){const s=btn.nextElementSibling; const on=s.textContent.includes("OFF"); s.textContent=on?"● ON":"● OFF";}
+  });
+  document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>{btn.closest(".demo-tabs").querySelector(".tabbody").textContent=btn.dataset.tab+" 내용";});
+  document.querySelectorAll("[data-count]").forEach(el=>{let n=0; const target=+el.dataset.count; clearInterval(el._t); el._t=setInterval(()=>{n+=2; if(n>=target){n=target; clearInterval(el._t);} el.textContent=n;},30);});
 }
 document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("active",x===b));render()});
 document.getElementById("q").oninput=render;
