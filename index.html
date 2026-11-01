@@ -97,6 +97,30 @@ main{max-width:1060px;margin:0 auto;padding:6px 20px 40px}
 .demo-pop{position:absolute;top:8px;right:10px;background:#fff;border:1px solid #ddd;border-radius:10px;padding:8px 10px;font-size:13px;display:none;box-shadow:0 4px 14px rgba(0,0,0,.15)}
 .demo-sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:10px;font-size:14px;display:none;border-radius:12px 12px 0 0}
 .demo-drop{position:absolute;top:34px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #ddd;border-radius:10px;padding:6px 10px;font-size:13px;display:none}
+@keyframes toastAuto{0%,100%{transform:translate(-50%,30px);opacity:0}20%,70%{transform:translate(-50%,0);opacity:1}}
+@keyframes modalAuto{0%,100%{transform:scale(.7);opacity:0}20%,70%{transform:scale(1);opacity:1}}
+@keyframes drawerAuto{0%,100%{transform:translateX(-100%)}25%,70%{transform:translateX(0)}}
+@keyframes tipAuto{0%,100%{opacity:0;transform:translateY(6px)}25%,70%{opacity:1;transform:translateY(0)}}
+@keyframes sheetAuto{0%,100%{transform:translateY(100%)}25%,70%{transform:translateY(0)}}
+@keyframes dropAuto{0%,100%{opacity:0;transform:translateY(-8px)}25%,70%{opacity:1;transform:translateY(0)}}
+@keyframes accAuto{0%,100%{height:22px}30%,70%{height:58px}}
+@keyframes crumbAuto{0%,100%{opacity:.35}25%{opacity:1}50%{opacity:.35}}
+@keyframes pageAuto{0%,100%{background:#fff}25%{background:#FFBC00}}
+@keyframes heroAuto{0%,100%{opacity:0;transform:translateY(12px)}25%,70%{opacity:1;transform:translateY(0)}}
+@keyframes emptyAuto{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
+@keyframes sidebarAuto{0%,100%{transform:translateX(-110%)}25%,70%{transform:translateX(0)}}
+.auto-toast{position:absolute;bottom:10px;left:50%;background:#222;color:#fff;padding:8px 14px;border-radius:99px;font-size:14px;animation:toastAuto 4s ease-in-out infinite}
+.auto-modal{position:absolute;inset:18px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 4px 20px rgba(0,0,0,.2);animation:modalAuto 4s ease-in-out infinite}
+.auto-drawer{position:absolute;top:0;bottom:0;left:0;width:55%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;animation:drawerAuto 4s ease-in-out infinite}
+.auto-tip{position:absolute;top:8px;background:#222;color:#fff;padding:4px 10px;border-radius:8px;font-size:13px;animation:tipAuto 4s ease-in-out infinite}
+.auto-sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:10px;font-size:14px;border-radius:12px 12px 0 0;animation:sheetAuto 4s ease-in-out infinite}
+.auto-drop{position:absolute;top:34px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #ddd;border-radius:10px;padding:6px 10px;font-size:13px;animation:dropAuto 4s ease-in-out infinite}
+.auto-acc{width:85%;background:#fff;border-radius:10px;padding:8px 12px;font-size:15px;overflow:hidden;animation:accAuto 4s ease-in-out infinite}
+.auto-sidebar{position:absolute;top:0;bottom:0;left:0;width:45%;background:#222;color:#fff;padding:10px;font-size:13px;animation:sidebarAuto 4s ease-in-out infinite}
+.auto-hero{animation:heroAuto 4s ease-in-out infinite;text-align:center}
+.auto-empty{animation:emptyAuto 3.6s ease-in-out infinite}
+.auto-page{animation:pageAuto 3.6s infinite}
+.auto-page:nth-child(2){animation-delay:1.2s}.auto-page:nth-child(3){animation-delay:2.4s}
 small.note{display:block;color:#777;margin-top:16px}
 footer{max-width:1060px;margin:0 auto;padding:0 20px 36px;color:#777;font-size:14px}
 @media(max-width:600px){.fontbox{margin-left:0}}
@@ -251,23 +275,23 @@ function demoFor(name){
   const b=(t)=>`<button class="copy" data-demo="${t}">예시 보기</button>`;
   const stage=(inner)=>`<div class="stage">${inner}</div>`;
   switch(name){
-    case "토스트": return stage(`<div class="demo-toast">저장됐어요</div>`)+b("toast");
-    case "스낵바": return stage(`<div class="demo-toast">삭제됨 · 실행 취소</div>`)+b("toast");
-    case "모달": return stage(`<div class="demo-modal">정말 삭제할까요? [확인]</div>`)+b("modal");
-    case "드로어": return stage(`<div class="demo-drawer">☰ 메뉴</div>`)+b("drawer");
-    case "툴팁": return stage(`<span style="font-size:28px">ⓘ</span><span class="demo-tip">이 버튼은 저장 기능이에요</span>`)+b("tip");
-    case "배지": return stage(`<span class="demo-badge">🔔<b>3</b></span>`);
-    case "아코디언": return stage(`<div class="demo-acc">자주 묻는 질문 ▾<p>답변이 여기에 펼쳐집니다.</p></div>`)+b("acc");
-    case "탭": return stage(`<div class="demo-tabs"><button class="copy" data-tab="소개">소개</button> <button class="copy" data-tab="후기">후기</button><div class="tabbody">소개 내용</div></div>`);
+    case "토스트": return stage(`<div class="auto-toast">저장됐어요</div>`);
+    case "스낵바": return stage(`<div class="auto-toast">삭제됨 · 실행 취소</div>`);
+    case "모달": return stage(`<div class="auto-modal">정말 삭제할까요? [확인]</div>`);
+    case "드로어": return stage(`<div class="auto-drawer">☰ 메뉴</div>`);
+    case "툴팁": return stage(`<span style="font-size:28px">ⓘ</span><span class="auto-tip">이 버튼은 저장 기능이에요</span>`);
+    case "배지": return stage(`<span class="demo-badge" style="animation:pulse 2.5s infinite">🔔<b>3</b></span>`);
+    case "아코디언": return stage(`<div class="auto-acc">자주 묻는 질문 ▾<p style="display:block;margin:6px 0 0;color:#555">답변이 여기에 펼쳐집니다.</p></div>`);
+    case "탭": return stage(`<div class="demo-tabs"><span class="auto-page" style="background:#fff;border-radius:8px;padding:4px 10px">소개</span> <span class="auto-page" style="background:#fff;border-radius:8px;padding:4px 10px">후기</span><div class="tabbody">내용이 자동으로 갈아끼워짐</div></div>`);
     case "스켈레톤 로딩": return stage(`<div class="skel"><div></div><div style="width:60%"></div><div style="width:75%"></div></div>`);
     case "스피너": return stage(`<div class="spin"></div>`);
     case "프로그레스 바": return stage(`<div class="progress"><i></i></div>`);
-    case "토글": return stage(`<button class="copy" data-demo="toggle">켜기 / 끄기</button><span style="margin-left:8px">● OFF</span>`);
+    case "토글": return stage(`<div style="animation:heroAuto 4s infinite"><span style="background:#FFBC00;border-radius:99px;padding:6px 14px">● ON</span> <span style="margin-left:8px">↔ OFF 자동 전환</span></div>`);
     case "캐러셀": return stage(`<div class="box anim-pan">1 → 2 → 3</div>`);
     case "페이드 인 / 아웃": return stage(`<div class="box anim-fade">제목</div>`);
     case "슬라이드 인": return stage(`<div class="box anim-slide">카드</div>`);
     case "스태거": return stage(`<div class="demo-stagger"><i></i><i></i><i></i></div>`);
-    case "호버 효과": return stage(`<div class="box" onmouseover="this.style.transform='scale(1.2)';this.style.boxShadow='0 8px 20px rgba(0,0,0,.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">버튼</div>`);
+    case "호버 효과": return stage(`<div class="box" style="animation:dolly 3.6s ease-in-out infinite">자동으로 커지고 그림자 생김</div>`);
     case "이징": return stage(`<div class="ball" style="animation:pan 2s cubic-bezier(.2,.8,.2,1) infinite"></div>`);
     case "루프": return stage(`<div class="ball anim-spin" style="border-radius:12px">↻</div>`);
     case "모핑": return stage(`<div class="box anim-morph"></div>`);
@@ -287,18 +311,18 @@ function demoFor(name){
     case "타임랩스": return stage(`<div class="box anim-fade">☀ → 🌙</div>`);
     case "렛터박스": return stage(`<div class="box">영화</div><div class="demo-bars top"></div><div class="demo-bars bottom"></div>`);
     case "모션 블러": return stage(`<div class="ball anim-pan" style="box-shadow:-18px 0 0 rgba(255,122,69,.35),-36px 0 0 rgba(255,122,69,.15)"></div>`);
-    case "브레드크럼": return stage(`<div class="demo-ui"><span class="crumb">홈 &gt; <b>목록</b> &gt; 글</span></div>`);
+    case "브레드크럼": return stage(`<div class="demo-ui"><span style="animation:crumbAuto 3.6s infinite">홈</span> &gt; <span style="animation:crumbAuto 3.6s infinite;animation-delay:1.2s">목록</span> &gt; <b style="animation:crumbAuto 3.6s infinite;animation-delay:2.4s">글</b></div>`);
     case "인피니트 스크롤": return stage(`<div class="demo-scroll"><div>글 1<br>글 2<br>글 3<br>글 4<br>글 5</div></div>`);
     case "풀다운 새로고침": return stage(`<div class="box" style="animation:tilt 1.6s ease-in-out infinite">↓ 당기기</div>`);
-    case "팝오버": return stage(`<div class="demo-pop">추가 옵션</div>`)+b("pop");
-    case "바텀 시트": return stage(`<div class="demo-sheet">아래에서 올라온 패널</div>`)+b("sheet");
-    case "드롭다운": return stage(`<div class="demo-drop">최신순<br>인기순</div>`)+b("drop");
-    case "사이드바": return stage(`<div style="display:flex;width:90%;height:80px;background:#fff;border-radius:10px;overflow:hidden;font-size:13px"><div style="width:45%;background:#222;color:#fff;padding:8px">메뉴<br>홈<br>목록</div><div style="padding:8px">본문</div></div>`);
-    case "히어로 섹션": return stage(`<div style="text-align:center"><b style="font-size:20px">큰 제목</b><br><button class="copy">시작하기</button></div>`);
-    case "빈 상태": return stage(`<div class="demo-ui" style="text-align:center;color:#777">📭<br>아직 내용이 없어요</div>`);
-    case "OG 이미지": return stage(`<div class="demo-ui"><div style="height:40px;background:#FFBC00;border-radius:8px"></div><b>공유 미리보기 제목</b></div>`);
-    case "OG 타이틀": return stage(`<div class="demo-ui">🔗 링크 공유<br><b>공유할 때 뜨는 제목</b></div>`);
-    case "페이지네이션": return stage(`<div><button class="copy" data-page="1">1</button> <button class="copy" data-page="2">2</button> <button class="copy" data-page="3">3</button></div>`);
+    case "팝오버": return stage(`<div class="auto-drop">추가 옵션</div><span>버튼</span>`);
+    case "바텀 시트": return stage(`<div class="auto-sheet">아래에서 올라온 패널</div>`);
+    case "드롭다운": return stage(`<div class="auto-drop">최신순<br>인기순</div><span>정렬 ▾</span>`);
+    case "사이드바": return stage(`<div class="auto-sidebar">메뉴<br>홈<br>목록</div><span style="margin-left:30%">본문</span>`);
+    case "히어로 섹션": return stage(`<div class="auto-hero"><b style="font-size:20px">큰 제목</b><br><span style="background:#FFBC00;border-radius:99px;padding:4px 12px">시작하기</span></div>`);
+    case "빈 상태": return stage(`<div class="demo-ui auto-empty" style="text-align:center;color:#777">📭<br>아직 내용이 없어요</div>`);
+    case "OG 이미지": return stage(`<div class="demo-ui" style="animation:heroAuto 4s infinite"><div style="height:40px;background:#FFBC00;border-radius:8px"></div><b>공유 미리보기 제목</b></div>`);
+    case "OG 타이틀": return stage(`<div class="demo-ui" style="animation:heroAuto 4s infinite">🔗 링크 공유<br><b>공유할 때 뜨는 제목</b></div>`);
+    case "페이지네이션": return stage(`<div><span class="auto-page" style="background:#fff;border-radius:8px;padding:4px 10px">1</span> <span class="auto-page" style="background:#fff;border-radius:8px;padding:4px 10px">2</span> <span class="auto-page" style="background:#fff;border-radius:8px;padding:4px 10px">3</span></div>`);
     case "스크롤 트리거": return stage(`<div class="box" style="animation:slide 2.4s infinite">화면에 보일 때 등장</div>`);
     case "키프레임": return stage(`<div style="position:relative;width:80%;height:60px"><span style="position:absolute;left:0;top:20px">●</span><span style="position:absolute;left:45%;top:0">●</span><span style="position:absolute;right:0;top:20px">●</span><div class="ball" style="position:absolute;animation:pan 2.4s infinite"></div></div>`);
     case "패럴랙스": return stage(`<div class="ball" style="animation:pan 4s infinite"></div><div class="ball" style="width:20px;height:20px;animation:pan 2s infinite"></div>`);
@@ -326,7 +350,7 @@ function demoFor(name){
     case "리버스": return stage(`<div class="ball" style="animation:pan 2.4s linear infinite reverse"></div>`);
     case "그린 스크린": return stage(`<div style="width:90%;height:80px;background:#2ecc71;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px">초록 배경 → 도시 배경으로 합성</div>`);
     case "컬러 그레이딩": return stage(`<div class="box" style="animation:fade 3s infinite">따뜻한 톤 ↔ 차가운 톤</div>`);
-    case "감소 모션": return stage(`<div class="box">동작 줄이기 ON → 움직임 없음</div>`);
+    case "감소 모션": return stage(`<div class="ball" style="animation:pan 1.2s ease-in-out 1 forwards">→</div><span style="font-size:13px">동작 줄이기 ON: 한 번만 움직이고 멈춤</span>`);
     case "휩 팬": return stage(`<div class="box" style="animation:pan .7s ease-in-out infinite">휙!</div>`);
     case "크래시 줌": return stage(`<div class="box" style="animation:dolly .8s ease-in-out infinite">급격히 당김</div>`);
     case "돌리 줌": return stage(`<div class="box" style="animation:dolly 2.4s infinite">배경만 왜곡</div>`);
@@ -334,11 +358,11 @@ function demoFor(name){
     case "더치 앵글": return stage(`<div class="box" style="transform:rotate(-18deg)">기울인 화면</div>`);
     case "FPV 드론 샷": return stage(`<div class="box" style="animation:pan 1s linear infinite">💨 1인칭 비행</div>`);
     case "스피드 램프": return stage(`<div class="ball" style="animation:pan 3s cubic-bezier(.1,.8,.9,.2) infinite">느림 → 빠름</div>`);
-    case "프리즈 프레임": return stage(`<div class="box">⏸ 멈춘 장면</div>`);
+    case "프리즈 프레임": return stage(`<div class="ball" style="animation:pan 3.6s ease-in-out infinite, fade 3.6s infinite">⏸</div><span style="font-size:13px">움직이다 멈춤</span>`);
     case "롤": return stage(`<div class="box" style="animation:spin 2.4s linear infinite">좌우 기울이기</div>`);
     case "트럭": return stage(`<div class="box anim-pan">좌우 평행 이동</div>`);
     case "페데스탈": return stage(`<div class="box anim-tilt">상하 이동</div>`);
-    case "스태틱 샷": return stage(`<div class="box">고정 📷 움직임 없음</div>`);
+    case "스태틱 샷": return stage(`<div style="width:90%;height:80px;border:3px solid #222;border-radius:10px;position:relative;overflow:hidden"><div class="ball" style="position:absolute;animation:pan 3.6s ease-in-out infinite"></div><span style="position:absolute;left:6px;top:4px;font-size:12px">📷 고정된 카메라</span></div>`);
     case "미디엄 샷": return stage(`<div style="width:70px;height:80px;background:#ddd;border-radius:10px;display:flex;align-items:flex-end;justify-content:center">허리 위</div>`);
     case "로우 앵글": return stage(`<div style="font-size:28px">▲ 아래에서 올려다봄</div>`);
     case "하이 앵글": return stage(`<div style="font-size:28px">▼ 위에서 내려다봄</div>`);
@@ -362,11 +386,11 @@ function demoFor(name){
     case "마퀴": return stage(`<div class="demo-marquee"><span>할인 중 · 할인 중 · 할인 중 ·&nbsp;</span></div>`);
     case "페이지 전환": return stage(`<div class="box" style="animation:fade 2.4s infinite">페이지 A → B 페이드</div>`);
     case "프리로더": return stage(`<div class="spin"></div><span style="margin-left:8px;font-size:14px">로딩 중…</span>`);
-    case "백 투 탑": return stage(`<div><button class="copy" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 맨 위로</button></div>`);
+    case "백 투 탑": return stage(`<div style="animation:tilt 3.6s ease-in-out infinite">↑ 맨 위로 자동 이동</div>`);
     case "타이핑 효과": return stage(`<div class="demo-type">안녕하세요!</div>`);
-    case "카드 리프트": return stage(`<div class="box" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 10px 20px rgba(0,0,0,.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">마우스 올려봐</div>`);
-    case "언더라인 애니메이션": return stage(`<span style="border-bottom:3px solid #FFBC00">링크 밑줄이 그어짐</span>`);
-    case "줌 온 호버": return stage(`<div class="box" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform=''">마우스 올려봐</div>`);
+    case "카드 리프트": return stage(`<div class="box" style="animation:slide 3.6s ease-in-out infinite">자동으로 떠오름</div>`);
+    case "언더라인 애니메이션": return stage(`<span style="border-bottom:3px solid #FFBC00;animation:heroAuto 3.6s infinite">링크 밑줄이 자동으로 그어짐</span>`);
+    case "줌 온 호버": return stage(`<div class="box" style="animation:dolly 3.6s ease-in-out infinite">자동으로 커짐</div>`);
     default: return stage(`<div class="box anim-fade">▶ 예시</div>`);
   }
 }
