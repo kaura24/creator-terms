@@ -298,7 +298,7 @@ function demoFor(name){
     case "빈 상태": return stage(`<div class="demo-ui" style="text-align:center;color:#777">📭<br>아직 내용이 없어요</div>`);
     case "OG 이미지": return stage(`<div class="demo-ui"><div style="height:40px;background:#FFBC00;border-radius:8px"></div><b>공유 미리보기 제목</b></div>`);
     case "OG 타이틀": return stage(`<div class="demo-ui">🔗 링크 공유<br><b>공유할 때 뜨는 제목</b></div>`);
-    case "페이지네이션": return stage(`<div><button class="copy" data-tab="1">1</button> <button class="copy" data-tab="2">2</button> <button class="copy" data-tab="3">3</button></div>`);
+    case "페이지네이션": return stage(`<div><button class="copy" data-page="1">1</button> <button class="copy" data-page="2">2</button> <button class="copy" data-page="3">3</button></div>`);
     case "스크롤 트리거": return stage(`<div class="box" style="animation:slide 2.4s infinite">화면에 보일 때 등장</div>`);
     case "키프레임": return stage(`<div style="position:relative;width:80%;height:60px"><span style="position:absolute;left:0;top:20px">●</span><span style="position:absolute;left:45%;top:0">●</span><span style="position:absolute;right:0;top:20px">●</span><div class="ball" style="position:absolute;animation:pan 2.4s infinite"></div></div>`);
     case "패럴랙스": return stage(`<div class="ball" style="animation:pan 4s infinite"></div><div class="ball" style="width:20px;height:20px;animation:pan 2s infinite"></div>`);
@@ -390,7 +390,8 @@ function render(){
     if(t==="drop"){const el=card.querySelector(".demo-drop"); el.style.display=el.style.display==="block"?"none":"block";}
     if(t==="toggle"){const s=btn.nextElementSibling; const on=s.textContent.includes("OFF"); s.textContent=on?"● ON":"● OFF";}
   });
-  document.querySelectorAll("[data-tab]").forEach(btn=>btn.onclick=()=>{btn.closest(".demo-tabs").querySelector(".tabbody").textContent=btn.dataset.tab+" 내용";});
+  document.querySelectorAll(".demo-tabs [data-tab]").forEach(btn=>btn.onclick=()=>{const tabs=btn.closest(".demo-tabs"); if(tabs) tabs.querySelector(".tabbody").textContent=btn.dataset.tab+" 내용";});
+  document.querySelectorAll("[data-page]").forEach(btn=>btn.onclick=()=>{btn.parentElement.querySelectorAll("[data-page]").forEach(x=>x.classList.remove("active")); btn.classList.add("active");});
   document.querySelectorAll("[data-count]").forEach(el=>{let n=0; const target=+el.dataset.count; clearInterval(el._t); el._t=setInterval(()=>{n+=2; if(n>=target){n=target; clearInterval(el._t);} el.textContent=n;},30);});
   document.querySelectorAll(".example-toggle").forEach(btn=>btn.onclick=()=>{
     const wrap=btn.nextElementSibling; const open=wrap.style.display!=="none";
